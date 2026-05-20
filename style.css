@@ -1,0 +1,79 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #111111;
+  color: #aaaaaa;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 60px 20px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+
+.rune-img {
+  height: 60px;
+  width: auto;
+}
+
+.fu-mark-wrap {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.fu-mark-img {
+  height: 40px;
+  width: auto;
+  opacity: 0.67;
+}
+
+.content {
+  flex: 1;
+}
+
+h2 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  font-weight: normal;
+  margin-bottom: 10px;
+  color: #aaaaaa;
+}
+
+p {
+  text-align: justify;
+  margin-bottom: 14px;
+  color: #aaaaaa;
+}
+
+.how-section {
+  margin-top: 40px;
+}
+
+.fu-logo {
+  margin-top: 8px;
+}
+
+footer {
+  text-align: center;
+  padding: 40px 0 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  color: #aaaaaa;
+}
