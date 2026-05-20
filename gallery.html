@@ -92,36 +92,63 @@
       opacity: 1;
     }
 
-    /* Spinning gun canvas — centred, floating above the chest */
-    #gun-container {
+    /* Spinning gun — wrapper handles positioning and hover */
+    #gun-wrapper {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: 55%;         /* centre of container lands at ~67% — just above chest */
+      top: 55%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: auto;
+    }
+
+    #gun-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: transparent;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+      transition: color 0.3s ease;
+    }
+
+    #gun-wrapper:hover #gun-label {
+      color: rgba(180,180,180,0.95);
+    }
+
+    #gun-container {
+      position: relative;
       width: 32vw;
       height: 24vh;
-      pointer-events: none;
+      pointer-events: auto;
     }
 
     #gun-container canvas {
       width: 100% !important;
       height: 100% !important;
       image-rendering: pixelated;
+      transition: filter 0.3s ease;
+    }
+
+    #gun-wrapper:hover #gun-container canvas {
+      filter: grayscale(1) brightness(0.55);
     }
 
     @media (orientation: portrait), (max-width: 768px) {
-      #gun-container {
-        top: 51%;        /* centre lands at ~60% on mobile */
-        width: 55vw;
-        height: 18vh;
-      }
+      #gun-wrapper { top: 51%; }
+      #gun-container { width: 55vw; height: 18vh; }
     }
   </style>
 </head>
 <body>
 
   <a href="index.html" class="back-link">← back</a>
-  <div id="gun-container"></div>
+  <div id="gun-wrapper">
+    <div id="gun-label">unlocked at level 4</div>
+    <div id="gun-container"></div>
+  </div>
 
   <!-- Hover zones over the two paintings -->
   <div class="painting-zone left"  id="zone-left"></div>
