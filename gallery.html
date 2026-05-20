@@ -51,22 +51,23 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: 28%;
-      width: 38vw;
-      height: 32vh;
+      top: 54%;         /* centre of container lands at ~66% — just above chest */
+      width: 32vw;
+      height: 24vh;
       pointer-events: none;
     }
 
     #gun-container canvas {
       width: 100% !important;
       height: 100% !important;
+      image-rendering: pixelated;
     }
 
     @media (orientation: portrait), (max-width: 768px) {
       #gun-container {
-        top: 22%;
-        width: 80vw;
-        height: 28vh;
+        top: 50%;        /* centre lands at ~59% on mobile */
+        width: 55vw;
+        height: 18vh;
       }
     }
   </style>
@@ -91,10 +92,14 @@
 
     const container = document.getElementById('gun-container');
 
-    // Renderer — alpha so background shows through
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    // Renderer at 1/8 resolution — CSS stretches it pixelated
+    const PIXEL_SCALE = 8;
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
+    renderer.setPixelRatio(1);
+    renderer.setSize(
+      Math.max(1, Math.floor(container.clientWidth  / PIXEL_SCALE)),
+      Math.max(1, Math.floor(container.clientHeight / PIXEL_SCALE))
+    );
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
@@ -149,7 +154,7 @@
       fbx.position.sub(centre);
       const size   = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
-      fbx.scale.setScalar(60 / maxDim);
+      fbx.scale.setScalar(40 / maxDim);
 
       // Tilt slightly so it reads like a display piece
       fbx.rotation.x = 0.2;
@@ -160,7 +165,10 @@
 
     // Resize
     window.addEventListener('resize', () => {
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(
+        Math.max(1, Math.floor(container.clientWidth  / PIXEL_SCALE)),
+        Math.max(1, Math.floor(container.clientHeight / PIXEL_SCALE))
+      );
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
     });
