@@ -75,6 +75,19 @@
       height: 100%;
       object-fit: contain;
     }
+    .taulu-caption {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(210,210,210,0.85);
+      line-height: 1.6;
+      letter-spacing: 0.03em;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+    }
+    .taulu-caption em {
+      font-style: italic;
+    }
     .taulu-overlay.visible {
       opacity: 1;
     }
@@ -117,9 +130,11 @@
   <!-- Taulu overlays -->
   <div class="taulu-overlay" id="taulu1-overlay">
     <img src="assets/images/taulu1.png" alt="painting 1" />
+    <div class="taulu-caption"><em>"a miracle"</em> — made for a dear friend on his birthday.</div>
   </div>
   <div class="taulu-overlay" id="taulu2-overlay">
     <img src="assets/images/taulu2.png" alt="painting 2" />
+    <div class="taulu-caption">I hope we meet again</div>
   </div>
 
   <script type="importmap">
