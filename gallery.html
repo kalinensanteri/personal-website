@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gallery — santerikalinen.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #b0b0b0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      padding: 24px 32px;
+      gap: 20px;
+    }
+
+    .back-link {
+      font-size: 12px;
+      color: #555;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .back-link:hover { color: #b0b0b0; }
+
+    .page-title {
+      font-size: 12px;
+      color: #b0b0b0;
+    }
+
+    .main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 32px 60px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .item-title {
+      font-size: 12px;
+      color: #b0b0b0;
+      margin-bottom: 12px;
+    }
+
+    .item-img {
+      width: 100%;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .locked-img {
+      width: 100%;
+      display: block;
+      margin-bottom: 8px;
+      opacity: 0.25;
+      filter: grayscale(1);
+    }
+
+    .unlock-label {
+      font-size: 11px;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    .doc-title {
+      font-size: 12px;
+      color: #b0b0b0;
+      margin-bottom: 6px;
+    }
+
+    /* Minecraft painting frame */
+    .mc-frame {
+      display: block;
+      margin-bottom: 8px;
+      padding: 5px;
+      background: #6B3F1E;
+      border-top:    3px solid #A0622A;
+      border-left:   3px solid #A0622A;
+      border-bottom: 3px solid #1E0900;
+      border-right:  3px solid #1E0900;
+      outline: 2px solid #1E0900;
+      box-shadow:
+        inset 2px 2px 0 0 #C07838,
+        inset -2px -2px 0 0 #3A1800;
+      image-rendering: pixelated;
+    }
+
+    .mc-frame img {
+      display: block;
+      width: 100%;
+      border: 2px solid #1E0900;
+      box-shadow:
+        inset 1px 1px 0 0 #000,
+        inset -1px -1px 0 0 #2A1000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="index.html" class="back-link">← back</a>
+    <span class="page-title">gallery</span>
+  </div>
+
+  <div class="main">
+    <div class="grid">
+
+      <div class="item">
+        <div class="item-title">wooden gun collection</div>
+        <img src="assets/images/gun-render.png" class="locked-img" alt="wooden gun collection" />
+        <div class="unlock-label">unlocked at level 4</div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">paintings</div>
+        <div class="mc-frame">
+          <img src="assets/images/painting.jpg" alt="paintings" />
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-title">documentaries</div>
+        <div class="doc-title">The Extra Mile - 100km<br>Ultramarathon documentary</div>
+        <div class="unlock-label">unlocked at level 2</div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
