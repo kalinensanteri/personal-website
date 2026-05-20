@@ -39,16 +39,140 @@
       letter-spacing: 0.04em;
       text-shadow: 0 1px 6px rgba(0,0,0,0.9);
       transition: color 0.3s;
+      z-index: 10;
     }
 
     .back-link:hover {
       color: rgba(255,255,255,1);
+    }
+
+    /* Spinning gun canvas — centred, floating above the chest */
+    #gun-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 28%;
+      width: 38vw;
+      height: 32vh;
+      pointer-events: none;
+    }
+
+    #gun-container canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @media (orientation: portrait), (max-width: 768px) {
+      #gun-container {
+        top: 22%;
+        width: 80vw;
+        height: 28vh;
+      }
     }
   </style>
 </head>
 <body>
 
   <a href="index.html" class="back-link">← back</a>
+  <div id="gun-container"></div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+
+    const container = document.getElementById('gun-container');
+
+    // Renderer — alpha so background shows through
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    container.appendChild(renderer.domElement);
+
+    // Scene + camera
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 2000);
+    camera.position.set(0, 0, 120);
+
+    // Lighting
+    const ambient = new THREE.AmbientLight(0xfff5e0, 2.0);
+    scene.add(ambient);
+    const key = new THREE.DirectionalLight(0xffffff, 3.0);
+    key.position.set(5, 8, 6);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xffd090, 1.0);
+    fill.position.set(-4, 2, 3);
+    scene.add(fill);
+
+    // Textures
+    const tl = new THREE.TextureLoader();
+    const albedo = tl.load('assets/gun/textures/WoodenToyGunAlbedo.png');
+    const normal = tl.load('assets/gun/textures/WoodenToyGunNormal.png');
+    const rough  = tl.load('assets/gun/textures/WoodenToyGunRough.png');
+    const metal  = tl.load('assets/gun/textures/WoodenToyGunMetal.png');
+    const ao     = tl.load('assets/gun/textures/WoodenToyGunAO.jpg');
+    albedo.colorSpace = THREE.SRGBColorSpace;
+
+    // Load FBX
+    let gun = null;
+    const loader = new FBXLoader();
+    loader.load('assets/gun/source/WoodenToyGun.fbx', (fbx) => {
+      fbx.traverse((child) => {
+        if (child.isMesh) {
+          child.material = new THREE.MeshStandardMaterial({
+            map:            albedo,
+            normalMap:      normal,
+            roughnessMap:   rough,
+            metalnessMap:   metal,
+            aoMap:          ao,
+            aoMapIntensity: 1.0,
+          });
+          // aoMap needs uv2 — copy uv1 if missing
+          if (!child.geometry.attributes.uv1 && child.geometry.attributes.uv) {
+            child.geometry.setAttribute('uv1', child.geometry.attributes.uv);
+          }
+        }
+      });
+
+      // Centre and scale to fit view
+      const box    = new THREE.Box3().setFromObject(fbx);
+      const centre = box.getCenter(new THREE.Vector3());
+      fbx.position.sub(centre);
+      const size   = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      fbx.scale.setScalar(60 / maxDim);
+
+      // Tilt slightly so it reads like a display piece
+      fbx.rotation.x = 0.2;
+
+      scene.add(fbx);
+      gun = fbx;
+    });
+
+    // Resize
+    window.addEventListener('resize', () => {
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+    });
+
+    // Animate
+    function animate() {
+      requestAnimationFrame(animate);
+      if (gun) gun.rotation.y += 0.008;
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
 
 </body>
 </html>
