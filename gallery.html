@@ -149,25 +149,12 @@
     }
 
     #screen-tint {
-      position: absolute;
-      left: 14%;
-      right: 14%;
-      top: 42%;
-      bottom: 12%;
-      background: transparent;
-      mix-blend-mode: screen;
-      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 10%, rgba(0,0,0,0.5) 55%, transparent 100%);
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 10%, rgba(0,0,0,0.5) 55%, transparent 100%);
-      transition: background 0.3s ease;
-    }
-
-    #screen-wrapper:hover #screen-tint {
-      background: rgba(85, 85, 85, 0.85);
+      display: none;
     }
 
     #screen-label {
       position: absolute;
-      top: 50%;
+      top: 65%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-family: 'Press Start 2P', monospace;
