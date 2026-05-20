@@ -154,12 +154,12 @@
       right: 18%;
       top: 28%;
       bottom: 28%;
-      background: rgba(80,80,80,0);
-      transition: background 0.3s ease;
+      background: transparent;
+      transition: backdrop-filter 0.3s ease;
     }
 
     #screen-wrapper:hover #screen-tint {
-      background: rgba(80,80,80,0.55);
+      backdrop-filter: grayscale(0.85) brightness(0.8);
     }
 
     #screen-label {
@@ -172,8 +172,8 @@
       color: transparent;
       white-space: nowrap;
       text-align: center;
-      text-shadow: 0 1px 6px rgba(0,0,0,1);
-      transition: color 0.3s ease;
+      text-shadow: 0 1px 6px rgba(0,0,0,0);
+      transition: color 0.3s ease, text-shadow 0.3s ease;
       pointer-events: none;
       z-index: 5;
       line-height: 2;
@@ -181,6 +181,7 @@
 
     #screen-wrapper:hover #screen-label {
       color: rgba(220,220,220,0.95);
+      text-shadow: 0 1px 6px rgba(0,0,0,1);
     }
 
     @media (orientation: portrait), (max-width: 768px) {
