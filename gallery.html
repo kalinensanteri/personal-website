@@ -10,138 +10,38 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      background: #0a0a0a;
-      color: #b0b0b0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-size: 12px;
-      font-weight: 300;
-      line-height: 1.6;
-      min-height: 100vh;
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      padding: 24px 32px;
-      gap: 20px;
+    body {
+      background: url('assets/images/gallery_6.1.1.jpg') center/cover no-repeat;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
     .back-link {
+      position: absolute;
+      top: 24px;
+      left: 28px;
       font-size: 12px;
-      color: #555;
+      font-weight: 300;
+      color: rgba(220,220,220,0.75);
       text-decoration: none;
       letter-spacing: 0.04em;
-    }
-    .back-link:hover { color: #b0b0b0; }
-
-    .page-title {
-      font-size: 12px;
-      color: #b0b0b0;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+      transition: color 0.3s;
     }
 
-    .main {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 0 32px 60px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .item-title {
-      font-size: 12px;
-      color: #b0b0b0;
-      margin-bottom: 12px;
-    }
-
-    .item-img {
-      width: 100%;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .locked-img {
-      width: 100%;
-      display: block;
-      margin-bottom: 8px;
-      opacity: 0.25;
-      filter: grayscale(1);
-    }
-
-    .unlock-label {
-      font-size: 11px;
-      color: #555;
-      margin-top: 6px;
-    }
-
-    .doc-title {
-      font-size: 12px;
-      color: #b0b0b0;
-      margin-bottom: 6px;
-    }
-
-    /* Minecraft painting frame */
-    .mc-frame {
-      display: block;
-      margin-bottom: 8px;
-      padding: 5px;
-      background: #6B3F1E;
-      border-top:    3px solid #A0622A;
-      border-left:   3px solid #A0622A;
-      border-bottom: 3px solid #1E0900;
-      border-right:  3px solid #1E0900;
-      outline: 2px solid #1E0900;
-      box-shadow:
-        inset 2px 2px 0 0 #C07838,
-        inset -2px -2px 0 0 #3A1800;
-      image-rendering: pixelated;
-    }
-
-    .mc-frame img {
-      display: block;
-      width: 100%;
-      border: 2px solid #1E0900;
-      box-shadow:
-        inset 1px 1px 0 0 #000,
-        inset -1px -1px 0 0 #2A1000;
+    .back-link:hover {
+      color: rgba(255,255,255,1);
     }
   </style>
 </head>
 <body>
 
-  <div class="top-bar">
-    <a href="index.html" class="back-link">← back</a>
-    <span class="page-title">gallery</span>
-  </div>
-
-  <div class="main">
-    <div class="grid">
-
-      <div class="item">
-        <div class="item-title">wooden gun collection</div>
-        <img src="assets/images/gun-render.png" class="locked-img" alt="wooden gun collection" />
-        <div class="unlock-label">unlocked at level 4</div>
-      </div>
-
-      <div class="item">
-        <div class="item-title">paintings</div>
-        <div class="mc-frame">
-          <img src="assets/images/painting.jpg" alt="paintings" />
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="item-title">documentaries</div>
-        <div class="doc-title">The Extra Mile - 100km<br>Ultramarathon documentary</div>
-        <div class="unlock-label">unlocked at level 2</div>
-      </div>
-
-    </div>
-  </div>
+  <a href="index.html" class="back-link">← back</a>
 
 </body>
 </html>
