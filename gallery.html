@@ -187,6 +187,14 @@
       #gun-wrapper { top: 51%; }
       #gun-container { width: 55vw; height: 18vh; }
     }
+
+    /* Tap equivalents for touch devices */
+    #gun-wrapper.tapped #gun-label { color: rgba(220,220,220,0.95); }
+    #gun-wrapper.tapped #gun-container canvas { filter: grayscale(1) brightness(0.55); }
+    #screen-wrapper.tapped #screen-label {
+      color: rgba(220,220,220,0.95);
+      text-shadow: 0 1px 6px rgba(0,0,0,1);
+    }
   </style>
 </head>
 <body>
@@ -323,13 +331,56 @@
   </script>
 
   <script>
-    const zones = [
-      { zone: document.getElementById('zone-left'),  overlay: document.getElementById('taulu1-overlay') },
-      { zone: document.getElementById('zone-right'), overlay: document.getElementById('taulu2-overlay') },
-    ];
-    zones.forEach(({ zone, overlay }) => {
-      zone.addEventListener('mouseenter', () => overlay.classList.add('visible'));
-      zone.addEventListener('mouseleave', () => overlay.classList.remove('visible'));
+    const gunWrapper    = document.getElementById('gun-wrapper');
+    const screenWrapper = document.getElementById('screen-wrapper');
+    const zoneLeft      = document.getElementById('zone-left');
+    const zoneRight     = document.getElementById('zone-right');
+    const taulu1        = document.getElementById('taulu1-overlay');
+    const taulu2        = document.getElementById('taulu2-overlay');
+
+    // Mouse hover for paintings
+    zoneLeft.addEventListener('mouseenter',  () => taulu1.classList.add('visible'));
+    zoneLeft.addEventListener('mouseleave',  () => taulu1.classList.remove('visible'));
+    zoneRight.addEventListener('mouseenter', () => taulu2.classList.add('visible'));
+    zoneRight.addEventListener('mouseleave', () => taulu2.classList.remove('visible'));
+
+    // Touch support
+    function clearAll() {
+      gunWrapper.classList.remove('tapped');
+      screenWrapper.classList.remove('tapped');
+      taulu1.classList.remove('visible');
+      taulu2.classList.remove('visible');
+    }
+
+    function makeTappable(el, activate) {
+      el.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const active = {
+          gun:    () => gunWrapper.classList.contains('tapped'),
+          screen: () => screenWrapper.classList.contains('tapped'),
+          taulu1: () => taulu1.classList.contains('visible'),
+          taulu2: () => taulu2.classList.contains('visible'),
+        }[activate]();
+        clearAll();
+        if (!active) {
+          if (activate === 'gun')    gunWrapper.classList.add('tapped');
+          if (activate === 'screen') screenWrapper.classList.add('tapped');
+          if (activate === 'taulu1') taulu1.classList.add('visible');
+          if (activate === 'taulu2') taulu2.classList.add('visible');
+        }
+      }, { passive: false });
+    }
+
+    makeTappable(gunWrapper,    'gun');
+    makeTappable(screenWrapper, 'screen');
+    makeTappable(zoneLeft,      'taulu1');
+    makeTappable(zoneRight,     'taulu2');
+
+    // Tap anywhere else to dismiss
+    document.addEventListener('touchstart', (e) => {
+      if (![gunWrapper, screenWrapper, zoneLeft, zoneRight].some(el => el.contains(e.target))) {
+        clearAll();
+      }
     });
   </script>
 
