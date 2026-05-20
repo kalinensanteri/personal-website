@@ -46,6 +46,39 @@
       color: rgba(255,255,255,1);
     }
 
+    /* Invisible hover zones over each painting */
+    .painting-zone {
+      position: absolute;
+      top: 38%;
+      width: 16%;
+      height: 50%;
+      cursor: pointer;
+    }
+    .painting-zone.left  { left: 0; }
+    .painting-zone.right { right: 0; }
+
+    /* Taulu overlay — fades in on hover */
+    .taulu-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(52vw, 70vh);
+      height: min(52vw, 70vh);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease-in;
+      z-index: 20;
+    }
+    .taulu-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .taulu-overlay.visible {
+      opacity: 1;
+    }
+
     /* Spinning gun canvas — centred, floating above the chest */
     #gun-container {
       position: absolute;
@@ -77,6 +110,18 @@
   <a href="index.html" class="back-link">← back</a>
   <div id="gun-container"></div>
 
+  <!-- Hover zones over the two paintings -->
+  <div class="painting-zone left"  id="zone-left"></div>
+  <div class="painting-zone right" id="zone-right"></div>
+
+  <!-- Taulu overlays -->
+  <div class="taulu-overlay" id="taulu1-overlay">
+    <img src="assets/images/taulu1.png" alt="painting 1" />
+  </div>
+  <div class="taulu-overlay" id="taulu2-overlay">
+    <img src="assets/images/taulu2.png" alt="painting 2" />
+  </div>
+
   <script type="importmap">
   {
     "imports": {
@@ -93,7 +138,7 @@
     const container = document.getElementById('gun-container');
 
     // Renderer at 1/8 resolution — CSS stretches it pixelated
-    const PIXEL_SCALE = 4;
+    const PIXEL_SCALE = 3;
     const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
     renderer.setPixelRatio(1);
     renderer.setSize(
@@ -180,6 +225,17 @@
       renderer.render(scene, camera);
     }
     animate();
+  </script>
+
+  <script>
+    const zones = [
+      { zone: document.getElementById('zone-left'),  overlay: document.getElementById('taulu1-overlay') },
+      { zone: document.getElementById('zone-right'), overlay: document.getElementById('taulu2-overlay') },
+    ];
+    zones.forEach(({ zone, overlay }) => {
+      zone.addEventListener('mouseenter', () => overlay.classList.add('visible'));
+      zone.addEventListener('mouseleave', () => overlay.classList.remove('visible'));
+    });
   </script>
 
 </body>
