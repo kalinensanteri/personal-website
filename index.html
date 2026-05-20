@@ -149,72 +149,10 @@
 </head>
 <body>
 
-  <div class="site-url">www.santerikalinen.com</div>
-
-  <div class="content">
-    <div class="bio">
-      <p>Currently on a quest to help the ones that are not alright, including myself</p>
-      <a href="https://www.backto101.com/why">www.backto101.com/why</a>
-    </div>
-
-    <div class="brought">
-      <span>things I´ve brought to</span>
-      <span class="ring-wrap" id="ring-wrap"></span>
-      <span>so far</span>
-    </div>
-  </div>
-
   <a href="gallery.html" class="temple-link">
     <span class="temple-label">gallery</span>
   </a>
 
-  <script>
-    const text  = 'the world';
-    const chars = text.split('');
-    const N     = chars.length;
-    const wrap  = document.getElementById('ring-wrap');
-
-    const cx = 44, cy = 20;
-    const rx = 28, ry = 10;
-    const step = (2 * Math.PI) / N - 0.38;
-    const duration = 14000;
-    let start = null;
-
-    const earthColours = [
-      '#5B92D8', '#4A7C2F', '#C4922A', '#b0b0b0',
-      '#2E8B57', '#1F6B9B', '#8B6914', '#A0522D', '#3CB371',
-    ];
-
-    const spans = chars.map((char, i) => {
-      const s = document.createElement('span');
-      s.className   = 'ring-letter';
-      s.textContent = char;
-      s.style.color = earthColours[i] || '#b0b0b0';
-      wrap.appendChild(s);
-      return s;
-    });
-
-    function animate(ts) {
-      if (!start) start = ts;
-      const base = Math.PI / 2 + ((ts - start) / duration) * 2 * Math.PI;
-
-      spans.forEach((span, i) => {
-        const theta = base + ((N - 1) / 2 - i) * step;
-        const x = cx + rx * Math.cos(theta);
-        const y = cy + ry * Math.sin(theta);
-        const sinT = Math.sin(theta);
-        const scaleX = sinT;
-        const scaleY = 0.8 + 0.2 * ((sinT + 1) / 2);
-        const opacity = Math.max(0.01, Math.abs(sinT));
-        span.style.opacity   = opacity;
-        span.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%) scale(${scaleX}, ${scaleY})`;
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    requestAnimationFrame(animate);
-  </script>
 
 </body>
 </html>
