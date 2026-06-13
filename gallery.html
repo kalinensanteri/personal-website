@@ -30,20 +30,22 @@
 
     .back-link {
       position: absolute;
-      top: 24px;
-      left: 28px;
-      font-size: 12px;
-      font-weight: 300;
-      color: rgba(220,220,220,0.75);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
-      transition: color 0.3s;
+      top: 20px;
+      left: 24px;
       z-index: 10;
+      opacity: 0.75;
+      transition: opacity 0.3s;
+      text-decoration: none;
     }
 
     .back-link:hover {
-      color: rgba(255,255,255,1);
+      opacity: 1;
+    }
+
+    .back-link img {
+      height: 32px;
+      width: auto;
+      filter: drop-shadow(0 1px 6px rgba(0,0,0,0.9));
     }
 
     /* Invisible hover zones over each painting */
@@ -199,7 +201,7 @@
 </head>
 <body>
 
-  <a href="index.html" class="back-link">← back</a>
+  <a href="index.html" class="back-link"><img src="assets/images/nuoli.avif" alt="back" /></a>
   <div id="gun-wrapper">
     <div id="gun-label">unlocked at level 4</div>
     <div id="gun-container"></div>
