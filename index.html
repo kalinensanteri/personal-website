@@ -100,11 +100,20 @@
     .mordor-link {
       position: absolute;
       left: 2%;
-      top: 60%;
-      width: 20%;
-      height: 12%;
+      top: 30%;
+      width: 22%;
+      height: 10%;
       cursor: pointer;
       text-decoration: none;
+    }
+
+    @media (orientation: portrait), (max-width: 768px) {
+      .mordor-link {
+        left: 1%;
+        top: 27%;
+        width: 52%;
+        height: 9%;
+      }
     }
 
     /* Temple clickable zone */
