@@ -6,15 +6,87 @@
   <title>santerikalinen.com</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; background: #fff; font-family: 'Times New Roman', Times, serif; }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: #fff;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .container {
+      padding: 24px;
+      max-width: 560px;
+      width: 100%;
+    }
+
+    .container img {
+      height: 180px;
+      width: auto;
+      max-width: 100%;
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .welcome {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .headline {
+      font-size: 15px;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .bio {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .links a {
+      font-size: 15px;
+      color: #000;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container img {
+        height: 120px;
+      }
+
+      .welcome {
+        margin-bottom: 16px;
+      }
+
+      .bio {
+        margin-bottom: 16px;
+      }
+
+      .links {
+        margin-top: 8px;
+      }
+    }
   </style>
 </head>
 <body>
-  <img src="assets/images/simple man.JPG" style="position:absolute;top:24px;left:24px;height:180px;width:auto;" />
-  <p style="position:absolute;top:220px;left:24px;font-size:15px;">hello and welcome to my page, my name is Santeri</p>
-  <p style="position:absolute;top:260px;left:24px;font-size:15px;font-style:italic;">who am I?</p>
-  <p style="position:absolute;top:295px;left:24px;font-size:15px;max-width:480px;line-height:1.7;">I spent my childhood by playing outside, building with legos and drawing/painting. Then I somehow ended up in business school.<br><br>I am currently focusing on making healthy food affordable for people who are working on important things at Simpleman Industries.</p>
-  <a href="https://www.linkedin.com/in/santeri-kalinen-0b6a83335/" target="_blank" style="position:absolute;top:470px;left:24px;font-size:15px;color:#000;text-decoration:underline;">LinkedIn</a>
-  <a href="https://youtu.be/JnJJ151dwOc?si=KhzEqoUjhVK2vPLF" target="_blank" style="position:absolute;top:500px;left:24px;font-size:15px;color:#000;text-decoration:underline;">documentary debut</a>
+  <div class="container">
+    <img src="assets/images/simple man.JPG" alt="Santeri" />
+    <p class="welcome">hello and welcome to my page, my name is Santeri</p>
+    <p class="headline">who am I?</p>
+    <p class="bio">I spent my childhood by playing outside, building with legos and drawing/painting. Then I somehow ended up in business school.<br><br>I am currently focusing on making healthy food affordable for people who are working on important things at Simpleman Industries.</p>
+    <p class="bio">I enjoy filming things and spending time in water, especially below the surface.</p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/santeri-kalinen-0b6a83335/" target="_blank">LinkedIn</a>
+      <a href="https://youtu.be/JnJJ151dwOc?si=KhzEqoUjhVK2vPLF" target="_blank">documentary debut</a>
+    </div>
+  </div>
 </body>
 </html>
